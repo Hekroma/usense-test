@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "deploy": "ng build --base-href /usense-test/ && npx angular-cli-ghpages --dir=dist/usense-test/browser"
+    "deploy": "ng build --base-href /usense-test/ && npx angular-cli-ghpages --dir=dist/cloudflare/browser"
   },
   "private": true,
   "packageManager": "npm@11.11.0",

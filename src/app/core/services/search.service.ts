@@ -14,15 +14,14 @@ export class SearchService {
 
   search(query: string): Observable<Item[]> {
     return this.http
-      .get<SerpApiResponse>('https://serpapi.com/search.json', {
+      .get<SerpApiResponse>(`${environment.serpApiBaseUrl}/search.json`, {
         params: {
           engine: 'google_local',
           q: query,
           google_domain: 'google.com',
           api_key: environment.serpApiKey,
-          async: true,
         },
       })
-      .pipe(map((response) => response.local_results ?? []));
+      .pipe(map(response => response.local_results ?? []));
   }
 }

@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  serpApiKey: '6a16adaee759240f63c3c40ade9d8f17c682a77e097cc6996a2d9bd1c691c994',
+  serpApiKey: '94246ce346bbe6fb3db96c8176e76268a8642be5842ee76ba6b762253504c385',
+  serpApiBaseUrl: '/serpapi',
 };

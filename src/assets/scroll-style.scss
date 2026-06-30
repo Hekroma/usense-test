@@ -1,0 +1,20 @@
+@use 'variables' as *;
+
+@mixin scroll-style {
+  scrollbar-width: thin;
+  scrollbar-color: $light-black-font transparent;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $light-black-font;
+    border-radius: 4px;
+  }
+}

@@ -1,28 +1,27 @@
 <div class="card-item-wrapper">
-  <div class="card-img">
-    <img [ngSrc]="item().thumbnail_large" [alt]="item().title" fill>
-  </div>
-  <h5>{{ item().title }}</h5>
-  <p>{{ item().description }}</p>
-  <div class="additional-info">
-    <div class="flex-row align-center address justify-space-between">
-      <div class="flex-row align-center">
-        <a href='https://www.google.com/maps?cid={{item().place_id}}' target="_blank">
-          <app-location-icon class="flex-row align-center"/>
-        </a>
-        <span >{{ item().address }}</span>
-      </div>
-
-
-      <div class="flex-row align-center"><app-comment-icon class="flex-row align-center comment-icon"/> {{ item().reviews }}</div>
+  <div>
+    <div class="card-img">
+      <img [ngSrc]="item().thumbnail_large" [alt]="item().title" fill>
     </div>
-<div class="flex-row align-center justify-space-between">
-  <div class="price">price: {{ item().price }}</div>
-  <div class="rating">{{ item().rating }} </div>
-  <div class="favorite"></div>
-</div>
-
-
-
+    <h5>{{ item().title }}</h5>
+    <p>{{ item().description }}</p>
+    <div class="additional-info">
+      <div class="flex-row align-center address justify-space-between">
+        <div class="flex-row align-center">
+          <a href='https://www.google.com/maps?cid={{item().place_id}}' target="_blank">
+            <location-icon class="flex-row align-center"/>
+          </a>
+          <span >{{ item().address }}</span>
+        </div>
+        <div class="price">{{ item().price }}</div>
+        <div class="flex-row align-center"><comment-icon class="flex-row align-center comment-icon"/> {{ item().reviews }}</div>
+      </div>
+  </div>
+  <div>
+    <div class="flex-row align-center justify-space-between">
+      <div class="flex-row rating align-center">{{ item().rating }}<app-star-rating [rating]="item().rating" /></div>
+      <div class="favorite"><favorite-icon/></div>
+    </div>
+  </div>
   </div>
 </div>

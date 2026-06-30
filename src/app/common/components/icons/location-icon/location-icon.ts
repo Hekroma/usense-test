@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-location-icon',
+  selector: 'location-icon',
   imports: [],
   templateUrl: './location-icon.html',
   styleUrl: './location-icon.scss',

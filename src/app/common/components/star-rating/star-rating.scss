@@ -1,0 +1,26 @@
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  width: 18px;
+  height: 18px;
+
+  .full {
+    fill: #f5a623;
+    stroke: #f5a623;
+    stroke-width: 1;
+  }
+
+  .half {
+    stroke: #f5a623;
+    stroke-width: 1;
+  }
+
+  .empty {
+    fill: transparent;
+    stroke: #ccc;
+    stroke-width: 1.5;
+  }
+}

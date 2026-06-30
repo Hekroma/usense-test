@@ -15,8 +15,8 @@ export class UrlInterceptor implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     const url = request.url;
-
-    if (!new RegExp(/(assets|\.json)/).exec(url) && !/https/.exec(url)) {
+    console.log(!url.match('https'));
+    if (!url.match('https')) {
       request = request.clone({
         url: `${request.url}`,
       });

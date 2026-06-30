@@ -1,8 +1,4 @@
 :host {
-  color: #1f1f1f;
+  color: inherit;
   transition: color 200ms ease;
-
-  &:hover {
-    color: #4285f4;
-  }
 }

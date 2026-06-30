@@ -17,7 +17,7 @@
   @if (pagination()?.length) {
     <div class="pagination">
       @for (page of pagination(); track page.pageNum) {
-        <a [href]="page.link" [class.active]="page.active">{{ page.pageNum }}</a>
+        <button (click)="$event.preventDefault();page.link && moveToPage(page.link)" [class.active]="page.active">{{ page.pageNum }}</button>
       }
     </div>
   }

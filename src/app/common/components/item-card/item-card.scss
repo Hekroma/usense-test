@@ -36,10 +36,18 @@ p {
 }
 
 .additional-info {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
   margin-top: 8px;
+  color: $dark-black-font;
 
+  .location-link {
+    text-decoration: none;
+    color: $dark-black-font;
+    &:hover {
+      color: #4285f4;
+    }
+  }
   .address {
     width: 100%;
     margin-bottom: 6px;
@@ -66,3 +74,5 @@ p {
   border: none;
   background-color: transparent;
 }
+
+

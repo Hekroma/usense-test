@@ -1,27 +1,21 @@
 <div class="card-item-wrapper">
-  <div>
+
     <div class="card-img">
       <img [ngSrc]="item().thumbnail_large" [alt]="item().title" fill>
     </div>
     <h5>{{ item().title }}</h5>
     <p>{{ item().description }}</p>
-    <div class="additional-info">
-      <div class="flex-row align-center address justify-space-between">
-        <div class="flex-row align-center">
-          <a href='https://www.google.com/maps?cid={{item().place_id}}' target="_blank">
-            <location-icon class="flex-row align-center"/>
+    <div class="additional-info flex-row align-center address justify-space-between">
+          <a href='https://www.google.com/maps?cid={{item().place_id}}' target="_blank" class="flex-row align-center location-link">
+            <location-icon class="flex-row align-center"/> <span >{{ item().address }}</span>
           </a>
-          <span >{{ item().address }}</span>
-        </div>
-        <div class="price">{{ item().price }}</div>
-        <div class="flex-row align-center"><comment-icon class="flex-row align-center comment-icon"/> {{ item().reviews }}</div>
-      </div>
+        <div class="price flex-row align-center justify-center">{{ item().price }}</div>
+        <div class="flex-row align-center justify-right"><comment-icon class="flex-row align-center comment-icon"/> {{ item().reviews }}</div>
   </div>
   <div>
     <div class="flex-row align-center justify-space-between">
       <div class="flex-row rating align-center">{{ item().rating }}<app-star-rating [rating]="item().rating" /></div>
       <button class="favorite-btn" (click)="toggleFavouriteState()"><favorite-icon [selected]="isFavourite()"/></button>
     </div>
-  </div>
   </div>
 </div>

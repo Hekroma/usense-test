@@ -7,6 +7,9 @@ import { LocalResult } from '@common/models/search-result.model';
   imports: [ItemCard],
   templateUrl: './items-list.html',
   styleUrl: './items-list.scss',
+  host: {
+    class: 'scroll-style',
+  },
 })
 export class ItemsList {
   public itemsList = input.required<LocalResult[]>();

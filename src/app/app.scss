@@ -1,0 +1,6 @@
+@use "variables" as *;
+
+.page-content {
+  display: flex;
+  height: calc(100vh - $header-height );
+}

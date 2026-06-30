@@ -1,12 +1,9 @@
-import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SearchService {
-  private readonly http = inject(HttpClient);
-
   search(query: string | null): Observable<unknown[]> {
-    return of([]);
+    return of([{ query }]);
   }
 }

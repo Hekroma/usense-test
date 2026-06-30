@@ -1,9 +1,22 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { catchError, debounceTime, defer, distinctUntilChanged, of, switchMap, tap } from 'rxjs';
-import { SearchService } from '../../core/services/search.service';
-import { SearchResult } from '../../common/models/search-result.model';
+import {
+  catchError,
+  debounceTime,
+  defer,
+  distinctUntilChanged,
+  of,
+  switchMap,
+  tap,
+} from 'rxjs';
+import { SearchService } from '@core/services/search.service';
+import { SearchResult } from '@common/models/search-result.model';
 
 @Component({
   selector: 'app-home',

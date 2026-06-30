@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "scroll-style" as *;
 
 .wrapper {
   display: flex;
@@ -12,7 +13,7 @@
   align-items: center;
   position: sticky;
   padding: 10px 0;
-  box-shadow: 0 0 8px #3172C458;
+  box-shadow: 0 0 8px $gray;
 
   &.full-height {
     height: 100%;
@@ -39,5 +40,50 @@
 
   label {
     display: none;
+  }
+}
+
+.item-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 14px;
+  align-items: start;
+  overflow: auto;
+  height: 100%;
+  padding: 40px;
+
+  item-card {
+    height: 100%;
+    min-height: 300px;
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 7px 64px 0 #00000012;
+
+  a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 4px;
+    margin: 10px 5px 20px;
+    background-color: $white;
+    color: $light-black-font;
+    border: none;
+    box-shadow: 0 0 8px $gray;
+
+    &.active {
+      background-color: $light-blue;
+      color: $white;
+    }
+
+    &:hover:not(.active) {
+      cursor: pointer;
+    }
   }
 }

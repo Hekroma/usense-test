@@ -1,0 +1,33 @@
+@use "variables" as *;
+
+.card-item-wrapper {
+  padding: 10px;
+  height: 100%;
+  box-shadow: 0 0 4px 0 rgba(199, 213, 255, 0.83);
+
+  .card-img {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+    height: 150px;
+
+    img {
+      object-fit: cover;
+    }
+  }
+}
+
+h5 {
+  font-size: 1rem;
+  color: $dark-black-font;
+}
+
+p {
+  font-style: italic;
+  font-size: 0.9rem;
+  text-align: justify;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

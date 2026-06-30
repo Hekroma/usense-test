@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <div class="search" [ngClass]="{'full-height' : itemsList().length === 0}" >
+  <div class="search" [ngClass]="{'full-height' : !itemsList().length}" >
     <div class="input-wrapper">
       <div class="input-container">
         <label for="'search'">Search</label>
@@ -9,9 +9,20 @@
     </div>
 
   </div>
-  <div class="item-list">
-    @for (item of itemsList(); track item) {
-      <item-card/>
+
+  @if (itemsList().length) {
+    <div class="item-list scroll-style">
+      @for (item of itemsList(); track item.provider_id) {
+        <item-card [item]="item"/>
+      }
+
+
+    </div>
+  }
+  <div class="pagination">
+    @for(page of pagination(); track page.pageNum) {
+      <a [class.active]="page.active">{{ page.pageNum }}</a>
     }
   </div>
+
 </div>

@@ -1,1 +1,7 @@
-<p>card works!</p>
+<div class="card-item-wrapper">
+  <div class="card-img">
+    <img [ngSrc]="item().thumbnail_large" [alt]="item().title" fill>
+  </div>
+  <h5>{{ item().title }}</h5>
+  <p>{{ item().description }}</p>
+</div>

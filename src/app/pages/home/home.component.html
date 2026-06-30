@@ -5,21 +5,41 @@
     <div class="input-wrapper">
       <div class="input-container">
         <label for="search">Search</label>
-        <input [formControl]="searchControl" id="search" name="search" placeholder="Type to search" />
+        <input
+          [formControl]="searchControl"
+          id="search"
+          name="search"
+          placeholder="Type to search"
+          (keydown.enter)="onEnter()"
+        />
       </div>
     </div>
   </div>
 
-  @if (itemsList().length) {
-    <app-items-list [itemsList]="itemsList()"/>
-  }
-
-  @if (pagination()?.length) {
-    <div class="pagination">
-      @for (page of pagination(); track page.pageNum) {
-        <button (click)="$event.preventDefault();page.link && moveToPage(page.link)" [class.active]="page.active">{{ page.pageNum }}</button>
-      }
+  @if (isLoading()) {
+    <div class="loader-wrapper">
+      <div class="loader"></div>
     </div>
   }
 
+  @if (!isLoading() && isEmpty()) {
+    <div class="empty-state">
+      <p>No results found. Try a different search term.</p>
+    </div>
+  }
+
+  @if (!isLoading() && itemsList().length) {
+    <app-items-list [itemsList]="itemsList()"/>
+  }
+
+  @if (!isLoading() && pagination()?.length) {
+    <div class="pagination">
+      @for (page of pagination(); track page.pageNum) {
+        <button
+          (click)="$event.preventDefault(); page.link && moveToPage(page.link)"
+          [class.active]="page.active"
+        >{{ page.pageNum }}</button>
+      }
+    </div>
+  }
 </div>

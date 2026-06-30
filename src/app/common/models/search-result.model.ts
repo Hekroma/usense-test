@@ -1,10 +1,12 @@
 export interface SearchResponse {
   search_metadata: SearchMetadata;
   search_parameters: SearchParameters;
-  local_map: LocalMap;
-  local_results: LocalResult[];
-  pagination: Pagination;
-  serpapi_pagination: SerpapiPagination;
+  search_information?: { local_results_state?: string };
+  local_map?: LocalMap;
+  local_results?: LocalResult[];
+  pagination?: Pagination;
+  serpapi_pagination?: SerpapiPagination;
+  error?: string;
 }
 
 export interface SearchMetadata {

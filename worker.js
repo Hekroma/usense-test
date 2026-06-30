@@ -16,13 +16,15 @@ export default {
       });
     }
 
-    const assetResponse = await env.ASSETS.fetch(request);
-
-    if (assetResponse.status === 404) {
-      const indexUrl = new URL('/index.html', url.origin);
-      return env.ASSETS.fetch(new Request(indexUrl.toString(), request));
+    try {
+      const assetResponse = await env.ASSETS.fetch(request);
+      if (assetResponse.status !== 404) {
+        return assetResponse;
+      }
+    } catch {
+      // asset not found — fall through to SPA fallback
     }
 
-    return assetResponse;
+    return env.ASSETS.fetch(new Request(`${url.origin}/index.html`));
   },
 };

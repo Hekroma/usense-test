@@ -39,6 +39,7 @@ export class Home {
   protected readonly isLoading: WritableSignal<boolean> = signal(false);
   protected readonly hasError: WritableSignal<boolean> = signal(false);
   protected readonly hasSearched: WritableSignal<boolean> = signal(false);
+  protected readonly isEmpty: WritableSignal<boolean> = signal(false);
   protected readonly pagination: WritableSignal<Pagination[] | null> = signal(null);
 
   private readonly querySubject = new BehaviorSubject<SearchTerm>(null);
@@ -49,14 +50,16 @@ export class Home {
         term
           ? this.searchService.search(term).pipe(
               map((res) => {
+                const results = res.local_results ?? [];
                 this.isLoading.set(false);
                 this.hasSearched.set(true);
+                this.isEmpty.set(results.length === 0);
                 this.pagination.set(
-                  res.pagination
+                  res.serpapi_pagination
                     ? paginationConverterFunction(res.serpapi_pagination)
                     : null,
                 );
-                return res.local_results ?? [];
+                return results;
               }),
               catchError(() => {
                 this.isLoading.set(false);
@@ -77,23 +80,38 @@ export class Home {
         distinctUntilChanged(),
         takeUntilDestroyed(),
       )
-      .subscribe((value) => {
-        const query = value?.trim() ?? '';
-        if (query) {
-          this.querySubject.next({ query });
-        } else {
-          this.hasSearched.set(false);
-          this.pagination.set(null);
-          this.querySubject.next(null);
-        }
-      });
+      .subscribe((value) => this._dispatch(value));
   }
 
-  protected moveToPage(link: string) {
+  protected onEnter(): void {
+    const value = this.searchControl.value;
+    this._dispatch(value);
+  }
+
+  protected moveToPage(link: string): void {
     const url = new URL(link);
-    this.querySubject.next({
+    this._search({
       query: url.searchParams.get('q')!,
       start: url.searchParams.get('start') ?? undefined,
     });
+  }
+
+  private _dispatch(value: string | null): void {
+    const query = value?.trim() ?? '';
+    if (query) {
+      this._search({ query });
+    } else {
+      this.isLoading.set(false);
+      this.hasSearched.set(false);
+      this.isEmpty.set(false);
+      this.pagination.set(null);
+      this.querySubject.next(null);
+    }
+  }
+
+  private _search(term: { query: string; start?: string }): void {
+    this.isLoading.set(true);
+    this.hasError.set(false);
+    this.querySubject.next(term);
   }
 }

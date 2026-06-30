@@ -51,6 +51,21 @@
   }
 }
 
+.back-btn {
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  color: $dark-black-font;
+  padding: 0;
+
+  &:hover,
+  &:focus-visible {
+    color: $blue;
+  }
+}
+
 .dialog-body {
   padding: 20px;
   overflow-y: auto;
@@ -65,12 +80,31 @@
 .photo-tile {
   position: relative;
   display: block;
+  width: 100%;
   height: 140px;
   border-radius: 4px;
   overflow: hidden;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 
   img {
     object-fit: cover;
+  }
+}
+
+.photo-large {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  max-height: 60vh;
+  border-radius: 4px;
+  overflow: hidden;
+  background: $dark-black-font;
+
+  img {
+    object-fit: contain;
   }
 }
 

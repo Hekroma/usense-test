@@ -7,7 +7,17 @@
     (click)="$event.stopPropagation()"
   >
     <div class="dialog-header">
-      <h2>{{ placeTitle() }} &mdash; {{ mode() === 'photos' ? 'Photos' : 'Reviews' }}</h2>
+      @if (mode() === 'photos' && selectedPhoto()) {
+        <button
+          #backButton
+          type="button"
+          class="back-btn"
+          aria-label="Back to photos"
+          (click)="closePhoto()"
+        >&larr; Back</button>
+      } @else {
+        <h2>{{ placeTitle() }} &mdash; {{ mode() === 'photos' ? 'Photos' : 'Reviews' }}</h2>
+      }
       <button
         #closeButton
         type="button"
@@ -25,12 +35,21 @@
       } @else if (errorMessage()) {
         <p class="error-state">{{ errorMessage() }}</p>
       } @else if (mode() === 'photos') {
-        @if (photos().length) {
+        @if (selectedPhoto(); as photo) {
+          <div class="photo-large">
+            <img [ngSrc]="photo.image" [alt]="placeTitle() + ' photo, large view'" fill priority>
+          </div>
+        } @else if (photos().length) {
           <div class="photos-grid">
             @for (photo of photos(); track photo.image) {
-              <a [href]="photo.image" target="_blank" rel="noopener" class="photo-tile">
+              <button
+                type="button"
+                class="photo-tile"
+                [attr.aria-label]="'View larger photo of ' + placeTitle()"
+                (click)="openPhoto(photo)"
+              >
                 <img [ngSrc]="photo.thumbnail" [alt]="placeTitle() + ' photo'" fill>
-              </a>
+              </button>
             }
           </div>
         } @else {

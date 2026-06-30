@@ -30,7 +30,7 @@ export type PlaceMediaMode = 'photos' | 'reviews';
   styleUrl: './place-media-dialog.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '(keydown.escape)': 'closed.emit()',
+    '(keydown.escape)': 'onEscape()',
   },
 })
 export class PlaceMediaDialog implements AfterViewInit {
@@ -43,15 +43,36 @@ export class PlaceMediaDialog implements AfterViewInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly closeButton =
     viewChild<ElementRef<HTMLButtonElement>>('closeButton');
+  private readonly backButton =
+    viewChild<ElementRef<HTMLButtonElement>>('backButton');
 
   protected readonly isLoading = signal(true);
   protected readonly errorMessage = signal<string | null>(null);
   protected readonly photos = signal<PlacePhoto[]>([]);
   protected readonly reviews = signal<PlaceReview[]>([]);
+  protected readonly selectedPhoto = signal<PlacePhoto | null>(null);
 
   ngAfterViewInit(): void {
     this.closeButton()?.nativeElement.focus();
     this.load();
+  }
+
+  protected openPhoto(photo: PlacePhoto): void {
+    this.selectedPhoto.set(photo);
+    queueMicrotask(() => this.backButton()?.nativeElement.focus());
+  }
+
+  protected closePhoto(): void {
+    this.selectedPhoto.set(null);
+    queueMicrotask(() => this.closeButton()?.nativeElement.focus());
+  }
+
+  protected onEscape(): void {
+    if (this.selectedPhoto()) {
+      this.closePhoto();
+      return;
+    }
+    this.closed.emit();
   }
 
   private load(): void {

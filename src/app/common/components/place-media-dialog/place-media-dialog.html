@@ -1,0 +1,69 @@
+<div class="dialog-backdrop" (click)="closed.emit()">
+  <div
+    class="dialog-panel"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="placeTitle() + ' ' + (mode() === 'photos' ? 'photos' : 'reviews')"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="dialog-header">
+      <h2>{{ placeTitle() }} &mdash; {{ mode() === 'photos' ? 'Photos' : 'Reviews' }}</h2>
+      <button
+        #closeButton
+        type="button"
+        class="close-btn"
+        aria-label="Close dialog"
+        (click)="closed.emit()"
+      >&times;</button>
+    </div>
+
+    <div class="dialog-body scroll-style">
+      @if (isLoading()) {
+        <div class="loader-wrapper">
+          <div class="loader"></div>
+        </div>
+      } @else if (errorMessage()) {
+        <p class="error-state">{{ errorMessage() }}</p>
+      } @else if (mode() === 'photos') {
+        @if (photos().length) {
+          <div class="photos-grid">
+            @for (photo of photos(); track photo.image) {
+              <a [href]="photo.image" target="_blank" rel="noopener" class="photo-tile">
+                <img [ngSrc]="photo.thumbnail" [alt]="placeTitle() + ' photo'" fill>
+              </a>
+            }
+          </div>
+        } @else {
+          <p class="empty-state">No photos found for this place.</p>
+        }
+      } @else {
+        @if (reviews().length) {
+          <ul class="reviews-list">
+            @for (review of reviews(); track $index) {
+              <li class="review-item">
+                <div class="review-header">
+                  <img
+                    [ngSrc]="review.user.thumbnail"
+                    [alt]="review.user.name"
+                    width="36"
+                    height="36"
+                    class="reviewer-avatar"
+                  >
+                  <div>
+                    <p class="reviewer-name">{{ review.user.name }}</p>
+                    <p class="review-meta">{{ review.rating }}&#9733; &middot; {{ review.date }}</p>
+                  </div>
+                </div>
+                @if (review.snippet) {
+                  <p class="review-snippet">{{ review.snippet }}</p>
+                }
+              </li>
+            }
+          </ul>
+        } @else {
+          <p class="empty-state">No reviews found for this place.</p>
+        }
+      }
+    </div>
+  </div>
+</div>

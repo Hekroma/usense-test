@@ -4,6 +4,7 @@ import {
   inject,
   input,
   InputSignal,
+  signal,
 } from '@angular/core';
 import { LocalResult } from '@common/models/search-result.model';
 import { NgOptimizedImage } from '@angular/common';
@@ -11,6 +12,10 @@ import { CommentIcon } from '@common/components/icons/comment-icon/comment-icon'
 import { LocationIcon } from '@common/components/icons/location-icon/location-icon';
 import { StarRating } from '@common/components/star-rating/star-rating';
 import { FavoriteIcon } from '@common/components/icons/favorite-icon/favorite-icon';
+import {
+  PlaceMediaDialog,
+  PlaceMediaMode,
+} from '@common/components/place-media-dialog/place-media-dialog';
 import { Store } from '@ngrx/store';
 import { FavouritesActions } from '@core/store/favourites/favourites.actions';
 import { selectIsFavourite } from '@core/store/favourites/favourites.selectors';
@@ -26,6 +31,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
     LocationIcon,
     StarRating,
     FavoriteIcon,
+    PlaceMediaDialog,
   ],
   templateUrl: './item-card.html',
   styleUrl: './item-card.scss',
@@ -45,6 +51,8 @@ export class ItemCard {
     { initialValue: false },
   );
 
+  protected readonly activeDialogMode = signal<PlaceMediaMode | null>(null);
+
   protected toggleFavouriteState(): void {
     const item = this.item();
     if (this.isFavourite()) {
@@ -52,5 +60,13 @@ export class ItemCard {
     } else {
       this.store.dispatch(FavouritesActions.addFavourite({ item }));
     }
+  }
+
+  protected openDialog(mode: PlaceMediaMode): void {
+    this.activeDialogMode.set(mode);
+  }
+
+  protected closeDialog(): void {
+    this.activeDialogMode.set(null);
   }
 }

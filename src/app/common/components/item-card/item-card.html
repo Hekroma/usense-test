@@ -1,8 +1,13 @@
 <div class="card-item-wrapper">
 
-    <div class="card-img">
+    <button
+      type="button"
+      class="card-img"
+      [attr.aria-label]="'View photos of ' + item().title"
+      (click)="openDialog('photos')"
+    >
       <img [ngSrc]="item().thumbnail_large" [alt]="item().title" fill>
-    </div>
+    </button>
     <h5>{{ item().title }}</h5>
     <p>{{ item().description }}</p>
     <div class="additional-info flex-row align-center address justify-space-between">
@@ -10,7 +15,12 @@
             <location-icon class="flex-row align-center"/> <span >{{ item().address }}</span>
           </a>
         <div class="price flex-row align-center justify-center">{{ item().price }}</div>
-        <div class="flex-row align-center justify-right"><comment-icon class="flex-row align-center comment-icon"/> {{ item().reviews }}</div>
+        <button
+          type="button"
+          class="flex-row align-center justify-right comments-btn"
+          [attr.aria-label]="'View reviews of ' + item().title"
+          (click)="openDialog('reviews')"
+        ><comment-icon class="flex-row align-center comment-icon"/> {{ item().reviews }}</button>
   </div>
   <div>
     <div class="flex-row align-center justify-space-between">
@@ -19,3 +29,12 @@
     </div>
   </div>
 </div>
+
+@if (activeDialogMode(); as mode) {
+  <place-media-dialog
+    [mode]="mode"
+    [placeId]="item().place_id"
+    [placeTitle]="item().title"
+    (closed)="closeDialog()"
+  />
+}

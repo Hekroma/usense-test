@@ -10,9 +10,14 @@
 
   .card-img {
     position: relative;
+    display: block;
     width: 100%;
     margin-bottom: 10px;
     height: 150px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
 
     img {
       object-fit: cover;
@@ -63,6 +68,15 @@ p {
 
   .comment-icon {
     margin-right: 4px;
+  }
+
+  .comments-btn {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
   }
 
   .rating app-star-rating {

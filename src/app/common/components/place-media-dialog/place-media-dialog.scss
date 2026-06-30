@@ -1,0 +1,153 @@
+@use "variables" as *;
+@use "scroll-style" as *;
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.dialog-panel {
+  background: $white;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 720px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid $gray;
+
+  h2 {
+    font-size: 1.1rem;
+    color: $dark-black-font;
+    margin: 0;
+  }
+}
+
+.close-btn {
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: $main-black-font;
+
+  &:hover,
+  &:focus-visible {
+    color: $dark-black-font;
+  }
+}
+
+.dialog-body {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.photo-tile {
+  position: relative;
+  display: block;
+  height: 140px;
+  border-radius: 4px;
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.reviews-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.review-item {
+  border-bottom: 1px solid $gray;
+  padding-bottom: 16px;
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.reviewer-avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.reviewer-name {
+  font-weight: 600;
+  color: $dark-black-font;
+  margin: 0;
+}
+
+.review-meta {
+  font-size: 0.85rem;
+  color: $light-black-font;
+  margin: 0;
+}
+
+.review-snippet {
+  font-size: 0.9rem;
+  color: $main-black-font;
+}
+
+.empty-state,
+.error-state {
+  text-align: center;
+  color: $main-black-font;
+  padding: 24px;
+}
+
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 4px solid $gray;
+  border-top-color: $light-blue;
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

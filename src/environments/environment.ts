@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
   serpApiKey:
-    '822ab656b5ae215de9ec14120c21584f9bc3a1dcfae641226dd8908d107c98b1',
+    '94246ce346bbe6fb3db96c8176e76268a8642be5842ee76ba6b762253504c385',
   serpApiBaseUrl: 'https://serpapi.com/search.json',
 };

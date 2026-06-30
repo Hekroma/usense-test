@@ -16,11 +16,13 @@ import {
   tap,
 } from 'rxjs';
 import { SearchService } from '@core/services/search.service';
-import { SearchResult } from '@common/models/search-result.model';
+import { ItemCard } from '@common/components/item-card/item-card';
+import { NgClass } from '@angular/common';
+import { Item } from '@common/models/search-result.model';
 
 @Component({
   selector: 'app-home',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ItemCard, NgClass],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,16 +39,16 @@ export class Home {
     initialValue: '',
   });
 
-  protected readonly results = toSignal(
+  protected readonly itemsList = toSignal(
     this.searchControl.valueChanges.pipe(
       debounceTime(400),
       distinctUntilChanged(),
       switchMap((query) => {
         const trimmed = query?.trim() ?? '';
+        console.log(trimmed);
         return defer(() =>
           trimmed
-            ? this._emptySearch()
-            : this.searchService.search(trimmed).pipe(
+            ? this.searchService.search(trimmed).pipe(
                 tap(() => {
                   this.isLoading.set(false);
                   this.hasSearched.set(true);
@@ -54,18 +56,19 @@ export class Home {
                 catchError(() => {
                   this.isLoading.set(false);
                   this.hasError.set(true);
-                  return of([] as SearchResult[]);
+                  return of([] as Item[]);
                 }),
-              ),
+              )
+            : this._emptySearch(),
         );
       }),
     ),
-    { initialValue: [] as SearchResult[] },
+    { initialValue: [] as Item[] },
   );
 
   private _emptySearch() {
     this.isLoading.set(false);
     this.hasSearched.set(false);
-    return of([] as SearchResult[]);
+    return of([] as Item[]);
   }
 }

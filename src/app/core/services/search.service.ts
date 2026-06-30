@@ -14,7 +14,7 @@ export class SearchService {
 
   search(query: string): Observable<Item[]> {
     return this.http
-      .get<SerpApiResponse>(`${environment.serpApiBaseUrl}/search.json`, {
+      .get<SerpApiResponse>(`${environment.serpApiBaseUrl}`, {
         params: {
           engine: 'google_local',
           q: query,
@@ -22,6 +22,6 @@ export class SearchService {
           api_key: environment.serpApiKey,
         },
       })
-      .pipe(map(response => response.local_results ?? []));
+      .pipe(map((response) => response.local_results ?? []));
   }
 }

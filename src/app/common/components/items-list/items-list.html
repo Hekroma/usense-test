@@ -1,0 +1,5 @@
+<div class="item-list scroll-style">
+  @for (item of itemsList(); track item.provider_id) {
+    <item-card [item]="item" />
+  }
+</div>

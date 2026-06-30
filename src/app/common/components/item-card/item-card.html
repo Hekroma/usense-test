@@ -20,7 +20,7 @@
   <div>
     <div class="flex-row align-center justify-space-between">
       <div class="flex-row rating align-center">{{ item().rating }}<app-star-rating [rating]="item().rating" /></div>
-      <div class="favorite"><favorite-icon/></div>
+      <button class="favorite-btn" (click)="toggleFavouriteState()"><favorite-icon [selected]="isFavourite()"/></button>
     </div>
   </div>
   </div>

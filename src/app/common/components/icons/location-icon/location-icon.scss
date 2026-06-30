@@ -1,0 +1,8 @@
+:host {
+  color: #1f1f1f;
+  transition: color 200ms ease;
+
+  &:hover {
+    color: #4285f4;
+  }
+}

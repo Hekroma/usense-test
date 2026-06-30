@@ -19,13 +19,12 @@ import {
 } from 'rxjs';
 import { SearchService } from '@core/services/search.service';
 import { ItemCard } from '@common/components/item-card/item-card';
-import { NgClass } from '@angular/common';
 import { LocalResult } from '@common/models/search-result.model';
 import { paginationConverterFunction } from '@common/components/functions/pagination-converter.function';
 import { Pagination } from '@common/models/base.models';
 @Component({
   selector: 'app-home',
-  imports: [ReactiveFormsModule, ItemCard, NgClass],
+  imports: [ReactiveFormsModule, ItemCard],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -79,6 +78,7 @@ export class Home {
   private _emptySearch() {
     this.isLoading.set(false);
     this.hasSearched.set(false);
+    this.pagination.set([]);
     return of([] as LocalResult[]);
   }
 }

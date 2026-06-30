@@ -1,28 +1,29 @@
 <div class="wrapper">
-  <div class="search" [ngClass]="{'full-height' : !itemsList().length}" >
+  <div class="search-spacer" [class.has-results]="itemsList().length"></div>
+
+  <div class="search" [class.has-results]="itemsList().length">
     <div class="input-wrapper">
       <div class="input-container">
-        <label for="'search'">Search</label>
-        <input [formControl]="searchControl" id="'search'" name="'search'" placeholder="Type to search"/>
+        <label for="search">Search</label>
+        <input [formControl]="searchControl" id="search" name="search" placeholder="Type to search" />
       </div>
-
     </div>
-
   </div>
 
   @if (itemsList().length) {
     <div class="item-list scroll-style">
       @for (item of itemsList(); track item.provider_id) {
-        <item-card [item]="item"/>
+        <item-card [item]="item" />
       }
-
-
     </div>
   }
-  <div class="pagination">
-    @for(page of pagination(); track page.pageNum) {
-      <a [class.active]="page.active">{{ page.pageNum }}</a>
-    }
-  </div>
+
+  @if (pagination()?.length) {
+    <div class="pagination">
+      @for (page of pagination(); track page.pageNum) {
+        <a [href]="page.link" [class.active]="page.active">{{ page.pageNum }}</a>
+      }
+    </div>
+  }
 
 </div>

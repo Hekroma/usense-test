@@ -31,3 +31,26 @@ p {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+
+.additional-info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+
+  .address {
+    width: 100%;
+    margin-bottom: 6px;
+  }
+
+  app-location-icon {
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .comment-icon {
+    margin-right: 4px;
+  }
+}

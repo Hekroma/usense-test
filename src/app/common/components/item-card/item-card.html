@@ -4,4 +4,25 @@
   </div>
   <h5>{{ item().title }}</h5>
   <p>{{ item().description }}</p>
+  <div class="additional-info">
+    <div class="flex-row align-center address justify-space-between">
+      <div class="flex-row align-center">
+        <a href='https://www.google.com/maps?cid={{item().place_id}}' target="_blank">
+          <app-location-icon class="flex-row align-center"/>
+        </a>
+        <span >{{ item().address }}</span>
+      </div>
+
+
+      <div class="flex-row align-center"><app-comment-icon class="flex-row align-center comment-icon"/> {{ item().reviews }}</div>
+    </div>
+<div class="flex-row align-center justify-space-between">
+  <div class="price">price: {{ item().price }}</div>
+  <div class="rating">{{ item().rating }} </div>
+  <div class="favorite"></div>
+</div>
+
+
+
+  </div>
 </div>

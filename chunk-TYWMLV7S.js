@@ -1,0 +1,1 @@
+import{Na as o,Oa as i,Ra as n,xa as a}from"./chunk-V6XJSZMP.js";var r=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=a({type:t,selectors:[["app-favourite"]],decls:2,vars:0,template:function(e,p){e&1&&(o(0,"p"),n(1,"favourite works!"),i())},encapsulation:2})};export{r as Favourite};

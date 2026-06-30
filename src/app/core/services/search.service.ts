@@ -11,7 +11,7 @@ export class SearchService {
   private readonly cache = inject(CacheService);
 
   search(term: { query: string; start?: string }): Observable<SearchResponse> {
-    const cacheKey = `search:${term.query}:${term.start ?? '0'}`;
+    const cacheKey = `search:${term.query.trim().toLowerCase()}:${term.start ?? '0'}`;
     const cached = this.cache.get<SearchResponse>(cacheKey);
 
     if (cached) {

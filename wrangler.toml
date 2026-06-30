@@ -1,2 +1,6 @@
 name = "usense-test"
-pages_build_output_dir = "dist/cloudflare/browser"
+compatibility_date = "2026-06-30"
+main = "worker.js"
+
+[assets]
+directory = "./dist/cloudflare/browser"

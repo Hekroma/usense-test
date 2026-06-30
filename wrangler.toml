@@ -1,0 +1,2 @@
+name = "usense-test"
+pages_build_output_dir = "dist/usense-test/browser"

@@ -1,27 +1,16 @@
 export default {
   async fetch(request) {
-    if (request.method === "OPTIONS") {
-      return new Response(null, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, OPTIONS",
-          "Access-Control-Allow-Headers": "*",
-        },
-      });
-    }
+    const incomingUrl = new URL(request.url);
 
-    const url = new URL(request.url);
-    const target = new URL("https://serpapi.com" + url.pathname + url.search);
+    const targetUrl = `https://serpapi.com/search.json${incomingUrl.search}`;
 
-    const response = await fetch(target.toString());
-    const body = await response.text();
-
-    return new Response(body, {
-      status: response.status,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
+    const response = await fetch(targetUrl, {
+      method: request.method,
+      headers: request.headers,
     });
+
+    const newResponse = new Response(response.body, response);
+    newResponse.headers.set("Access-Control-Allow-Origin", "*");
+    return newResponse;
   },
 };

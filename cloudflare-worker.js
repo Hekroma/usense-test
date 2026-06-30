@@ -11,7 +11,8 @@ export default {
     }
 
     const url = new URL(request.url);
-    const target = new URL("https://serpapi.com" + url.pathname + url.search);
+    const target = `https://serpapi.com/search.json${url.search}`;
+    // const target = new URL("https://serpapi.com" + url.pathname + url.search);
 
     const response = await fetch(target.toString());
     const body = await response.text();
